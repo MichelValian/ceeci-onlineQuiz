@@ -42,6 +42,11 @@ const useNavigation = () => {
     router.push(destination);
   };
 
+
+  const handleLotteryClick = () => {
+    router.push('/lottery');
+  };
+
   return {
     handleUsersClick,
     handleCoursesClick,
@@ -51,6 +56,7 @@ const useNavigation = () => {
     navigateToBankCreation,
     navigateToQuestionsCreation,
     navigateToQuestionsResults,
+    handleLotteryClick,
 
   };
 };
