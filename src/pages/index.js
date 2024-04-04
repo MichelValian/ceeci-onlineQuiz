@@ -8,6 +8,7 @@ import {
   CardActions,
   CardHeader,
   CardMedia,
+  Grid,
 } from "@mui/material";
 import { Assignment, Devices, Settings } from "@mui/icons-material";
 import PeopleIcon from "@mui/icons-material/People";
@@ -46,21 +47,21 @@ function Home({ user }) {
           justifyContent: "center",
         }}
       >
-        Organización...
+        Siempre un paso adelante. Educación profesional para tu futuro.
       </Typography>
 
-      {/* <CardMedia
+      <CardMedia
         component="img"
         alt="Imagen"
-        image="https://reisdigital.es/wp-content/uploads/2022/10/los-mejores-software-y-hardware-para-tu-empresa.jpg"
+        image='././imgHome.jpg'
         sx={{
-          width: 600,
+          width: 1300,
           margin: "auto",
           display: "block",
-          borderRadius: 10,
+          borderRadius: 5,
         }}
-      /> */}
-      <Typography
+      />
+      {/* <Typography
         sx={{
           marginTop: 1,
           fontSize: 20,
@@ -70,7 +71,7 @@ function Home({ user }) {
         }}
       >
         Somos una organización...
-      </Typography>
+      </Typography> */}
       <div
         style={{
           display: "flex",
@@ -89,6 +90,8 @@ function Home({ user }) {
             padding: "10px 30px", 
             width: '300px',
             marginBottom: 4,
+            textAlign: "center", 
+            backgroundColor: "#30315A"
           }}
           onClick={handleLoginClick}
         >

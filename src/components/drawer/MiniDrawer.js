@@ -24,6 +24,7 @@ import { getSession, useSession } from 'next-auth/react';
 import ButtonCloseSession from "../ButtonCloseSession";
 import useNavigation from "@/pages/api/routes/routes";
 import { Grid, Tooltip } from "@mui/material";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const drawerWidth = 240;
 
@@ -102,6 +103,7 @@ export default function MiniDrawer({children}) {
     handleUsersClick, 
     handleCoursesClick, 
     handleQuizzesClick,
+    handleLotteryClick,
   } = useNavigation();
 
   const handleDrawerOpen = () => {
@@ -176,7 +178,7 @@ export default function MiniDrawer({children}) {
               </ListItemButton>
             </ListItem>
           ) : (
-            ["Usuarios", "Salas"].map((text, index) => (
+            ["Usuarios", "Salas", "Juego de lotería"].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={{
@@ -190,6 +192,8 @@ export default function MiniDrawer({children}) {
                       ? () => handleUsersClick(session)
                       : index === 1
                       ? handleCoursesClick
+                      : index === 2 // Verifica si el índice es 2 (para la opción de lotería)
+                      ? handleLotteryClick // Si es así, llama a handleLotteryClick
                       : handleQuizzesClick
                   }
                 >
@@ -209,6 +213,11 @@ export default function MiniDrawer({children}) {
                     {index === 1 && (
                       <Tooltip title="Salas" arrow>
                         <ClassIcon />
+                      </Tooltip>
+                    )}
+                    {index === 2 && ( // Agrega el ícono y tooltip para la opción de lotería
+                      <Tooltip title="Lotería" arrow>
+                        <DashboardIcon />
                       </Tooltip>
                     )}
                     
