@@ -16,25 +16,30 @@ export default function handler(req, res) {
     }
 }
 
+
 const getAnswers = async (req, res) => {
-
-    const userId = req.query.userId;
-    let whereCondition = {};
-
-        if (userId) {
-            whereCondition = {
-                userId: userId,
-            };
-        }
+    const {userId, questionId} = req.query;
 
     try{
-        //los datos vienen del req.body
-        console.log(req.body);
-
-        const answer = await db.Answer.findAll({
-            attributes: ['selection','userId', 'questionId', 'optionId'],
-            where: whereCondition,
+        let answer;
+       if (userId) {
+        answer = await db.Answer.findAll({
+            where: {
+                userId: userId
+            }
+        })
+        }else if (questionId){
+            answer = await db.Answer.findAll({
+                where: {
+                    questionId: questionId,
+                }
+            })
+       }else {
+        answer = await db.Answer.findAll({
+            attributes: ['userId', 'questionId', 'optionId', 'selection', 'createdAt']
         });
+       }
+        
         return res.json(answer)
     
     }catch(error){
@@ -55,6 +60,46 @@ const getAnswers = async (req, res) => {
         })
     }
 }
+
+// const getAnswers = async (req, res) => {
+
+//     const userId = req.query.userId;
+//     let whereCondition = {};
+
+//         if (userId) {
+//             whereCondition = {
+//                 userId: userId,
+//             };
+//         }
+
+//     try{
+//         //los datos vienen del req.body
+//         console.log(req.body);
+
+//         const answer = await db.Answer.findAll({
+//             attributes: ['selection','userId', 'questionId', 'optionId'],
+//             where: whereCondition,
+//         });
+//         return res.json(answer)
+    
+//     }catch(error){
+//         console.log(error);
+//         let errors = []
+
+//         if(error.errors){
+//             //extrae la info
+//             errors = error.errors.map((item) => ({
+//                 error: item.message, 
+//                 field: item.path,
+//             }));
+//         }
+
+//         return res.status(400).json({
+//             message: `Ocurrió un error al procesar la petición: ${error.message}`,
+//             errors,
+//         })
+//     }
+// }
 
 
 // const getAnswers = async (req, res) => {
